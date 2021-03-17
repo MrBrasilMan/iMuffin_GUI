@@ -22,23 +22,23 @@ def get_website():
 window = Tk()
 window.resizable(False, False)
 window.title("iMuffin")
-window.geometry('350x200')
+window.geometry('700x400')
 
 #Submit Button
 button = Button(window,
-	text = 'Go',
+	text = "Let's Go!",
 	command = get_website,
-  width = 2,
+  width = 6,
   height = 1,
 )  
 #Search Button
 search = tk.Text(window, 
                    height = 1, 
-                   width = 35) 
+                   width = 50) 
 
 #Website Text and Scrollbar setup
 scroll_bar = tk.Scrollbar(window)
-website_body_text = tk.Text(window, height=9, width=35)
+website_body_text = tk.Text(window, height=20, width=70)
 #Pack all parts of the application
 button.grid(column=0, row=0)  
 search.grid(column=1, row=0)
