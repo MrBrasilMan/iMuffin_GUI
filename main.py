@@ -3,8 +3,9 @@ import tkinter as tk
 import tkinter.messagebox as msgbox
 import parser
 import requests
+#Warning, this is some pretty messy code right now
 #Preset webtext to the home page
-webtext = "Welcome to iMuffin Visual Alpha!"
+webtext = "Welcome to iMuffin Visual Alpha!\nVersion 0.5\nNews\niMuffin Terminal will be discontinued and this edition will become the new edition. The terminal edition will be left in 0.4.1, and may recieve further updates. This edition will be kept because of it in general being more accessable and easier to use\n\nSorry for any inconvience this causes."
 #This is the web library of 0.4.2, a little modified to incorperate some built in functions
 def get_website():
   try:
@@ -19,6 +20,7 @@ def get_website():
 
 #Starting out dimension
 window = Tk()
+window.resizable(False, False)
 window.title("iMuffin")
 window.geometry('350x200')
 
@@ -32,14 +34,14 @@ button = Button(window,
 #Search Button
 search = tk.Text(window, 
                    height = 1, 
-                   width = 40) 
+                   width = 35) 
 
 #Website Text and Scrollbar setup
 scroll_bar = tk.Scrollbar(window)
-website_body_text = tk.Text(window, height=10, width=100)
+website_body_text = tk.Text(window, height=9, width=35)
 #Pack all parts of the application
-button.pack()  
-search.pack()
-website_body_text.pack(side = tk.LEFT)
+button.grid(column=0, row=0)  
+search.grid(column=1, row=0)
+website_body_text.grid(column=1, row=5)
 website_body_text.insert(tk.END, webtext)
 window.mainloop()
