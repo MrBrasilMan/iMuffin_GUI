@@ -16,7 +16,7 @@ def rm_p(toparse):
     #Add chars if add to string is true (will ingore > because exception)
     elif add_to_string == True and letter != ">":
       toreturn = toreturn + letter
-  return toreturn.replace("\n", "\t")
+  return toreturn
 def link_list(possiblelinkbody):
   #This was a very complex function to write, and even I do not fully understand how it works. But it does (somewhat) and I am here to document it.
   #First, get a list of functions
