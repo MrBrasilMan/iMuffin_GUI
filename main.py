@@ -57,7 +57,7 @@ website_body_text = tk.Text(
 #Pack all parts of the application
 gobutton.grid(column=0, row=0)  
 search.grid(column=1, row=0)
-optionbutton.grid(column=0,row=12)
+#optionbutton.grid(column=0,row=12)
 website_body_text.grid(column=1, row=5)
 website_body_text.insert(tk.END, webtext)
 window.mainloop()
