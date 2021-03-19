@@ -3,25 +3,34 @@ import tkinter as tk
 import tkinter.messagebox as msgbox
 import parser
 import requests
+print (parser.get_title("<p>lol</p><title>oof</title>"))
 #Warning, this is some pretty messy code right now
 #Preset webtext to the home page
-webtext = "Welcome to iMuffin Visual Alpha! You are running version 0.5.1\nUpcoming Features\n___________________________________________________\nInternet Searching!\nCleaner parsing!\n"
+webtext = "Welcome to iMuffin Visual Alpha! You are running version 0.5.5\nNewest Features\n___________________________________________________\nBrand new GUI interface!\nEnd of Page!\nBetter documentation.\nMore responsive interface!\nTitles"
 #This is the web library of 0.4.2, a little modified to incorperate some built in functions
+#This function gets the website and returns it in text
 def get_website():
-  try:
-    window.title(search.get(1.0, "end-1c") + " - iMuffin")
+  #try:
+    #Get the users' query.
     body = requests.get(search.get(1.0, "end-1c"))
+    #This places the parsed html in the website text, plus an end of page, and list of links belowards.
+    window.title(parser.get_title(body) + " - iMuffin")
     website_text = parser.the_parse(body.text) + "End Page\n__________________________________\nList of links\n__________________________________\n" + parser.link_list(body.text)
+    #Delete all of the text from the previous website
     website_body_text.delete('1.0', END)
+    #This is putting the text in the main textbox to view.
     webtext = website_text
     website_body_text.insert(tk.END, webtext)
-  except:
-    window.title("Error - iMuffin")
-    try:
-      requests.get(search.get(1.0, "end-1c"))
-      msgbox.showinfo("Uh Oh....",  "A software error occured.") 
-    except:
-      msgbox.showinfo("Aw, Snap!",  "Invalid URL. Does this website exist?") 
+  #Error handling
+  #except:
+    #window.title("Error - iMuffin")
+    #If the url could be found, but an error still occured
+    #try:
+      #requests.get(search.get(1.0, "end-1c"))
+      #msgbox.showerror("Uh Oh....",  "A software error occured.") 
+    #If the URL is invalid.
+    #except:
+      #msgbox.showerror("Aw, Snap!",  "Invalid URL. Does this website exist?") 
 
 #Starting out dimension
 window = Tk()
@@ -36,19 +45,12 @@ gobutton = Button(window,
   width = 6,
   height = 1,
 )  
-optionbutton = Button(window,
-  text = "Options",
-  command = get_website,
-  width = 6,
-  height = 1,
-)
 #Search Button
 search = tk.Text(window, 
                    height = 1, 
                    width = 45) 
 
-#Website Text and Scrollbar setup
-scroll_bar = tk.Scrollbar(window)
+#Website Text
 website_body_text = tk.Text(
   window, 
   height=20, 
@@ -57,7 +59,6 @@ website_body_text = tk.Text(
 #Pack all parts of the application
 gobutton.grid(column=0, row=0)  
 search.grid(column=1, row=0)
-#optionbutton.grid(column=0,row=12)
 website_body_text.grid(column=1, row=5)
 website_body_text.insert(tk.END, webtext)
 window.mainloop()

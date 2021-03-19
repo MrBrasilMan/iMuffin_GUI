@@ -184,18 +184,30 @@ def get_title(thebody):
   body = list(thebody)
   lbody = len(body)
   counter = -1
+  found_a_title = False
+  toreturn_str = list()
   while counter-1 != lbody:
-    counter = counter + 1
-    if body[coutner] == "<":
-      if body[counter + 1] == "t":
-        if body[counter + 2] == "i":
-          if body[counter + 3] == "t":
-            if body[counter + 4] == "l":
-              counter = counter + 7
-              title_not_collected = True
-              while title_not_collected:
-                counter = counter + 1
-                if body[counter] == "/":
-                  if body[counter -1] == "<":
-                    title_not_collected = False
-                    pass
+    try:
+      counter = counter + 1
+      if body[counter] == "<":
+        if body[counter + 1] == "t":
+          if body[counter + 2] == "i":
+            if body[counter + 3] == "t":
+              if body[counter + 4] == "l":
+                if found_a_title != True:
+                  counter = counter + 6
+                  title_not_collected = True
+                  while title_not_collected:
+                    counter = counter + 1
+                    if counter-1 == lbody:
+                      return "No Title"
+                    if body[counter] == "/":
+                      if body[counter -1] == "<":
+                        title_not_collected = False
+                        found_a_title = True
+                        str1 = ""
+                        return str1.join(toreturn_str).replace("<", "")
+                    else:
+                      toreturn_str.append(body[counter])
+    except:
+      return "No Title"
